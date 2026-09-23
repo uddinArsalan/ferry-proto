@@ -414,7 +414,7 @@ const file_auth_auth_proto_rawDesc = "" +
 	"\vAuthService\x12<\n" +
 	"\x05Login\x12\x18.proto.auth.LoginRequest\x1a\x19.proto.auth.LoginResponse\x12E\n" +
 	"\bRegister\x12\x1b.proto.auth.RegisterRequest\x1a\x1c.proto.auth.RegisterResponse\x12B\n" +
-	"\aRefresh\x12\x1a.proto.auth.RefreshRequest\x1a\x1b.proto.auth.RefreshResponseB0Z.github.com/uddinArsalan/ferry-proto/proto/authb\x06proto3"
+	"\aRefresh\x12\x1a.proto.auth.RefreshRequest\x1a\x1b.proto.auth.RefreshResponseB*Z(github.com/uddinArsalan/ferry-proto/authb\x06proto3"
 
 var (
 	file_auth_auth_proto_rawDescOnce sync.Once

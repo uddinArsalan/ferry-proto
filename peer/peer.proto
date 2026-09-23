@@ -5,7 +5,7 @@ import "google/protobuf/empty.proto";
 
 package registry.proto.peer;
 
-option go_package = "github.com/uddinArsalan/ferry-proto/proto/peer";
+option go_package = "github.com/uddinArsalan/ferry-proto/peer";
 
 service PeerService {
     rpc RegisterPeer(RegisterPeerRequest) returns(PeerID);

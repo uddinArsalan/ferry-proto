@@ -8,7 +8,7 @@ package group
 
 import (
 	context "context"
-	peer "github.com/uddinArsalan/ferry-proto/proto/peer"
+	peer "github.com/uddinArsalan/ferry-proto/peer"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"

@@ -7,7 +7,7 @@
 package group
 
 import (
-	peer "github.com/uddinArsalan/ferry-proto/proto/peer"
+	peer "github.com/uddinArsalan/ferry-proto/peer"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
@@ -236,7 +236,7 @@ const file_group_group_proto_rawDesc = "" +
 	"\vCreateGroup\x12(.registry.proto.group.CreateGroupRequest\x1a\x1b.registry.proto.group.Group\x12M\n" +
 	"\x10GetGroupsForPeer\x12\x1b.registry.proto.peer.PeerID\x1a\x1c.registry.proto.group.Groups\x12A\n" +
 	"\tGetGroups\x12\x16.google.protobuf.Empty\x1a\x1c.registry.proto.group.Groups\x12F\n" +
-	"\bGetGroup\x12\x1d.registry.proto.group.GroupID\x1a\x1b.registry.proto.group.GroupB1Z/github.com/uddinArsalan/ferry-proto/proto/groupb\x06proto3"
+	"\bGetGroup\x12\x1d.registry.proto.group.GroupID\x1a\x1b.registry.proto.group.GroupB+Z)github.com/uddinArsalan/ferry-proto/groupb\x06proto3"
 
 var (
 	file_group_group_proto_rawDescOnce sync.Once

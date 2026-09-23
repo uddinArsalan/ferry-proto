@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package proto.auth;
 
-option go_package = "github.com/uddinArsalan/ferry-proto/proto/auth";
+option go_package = "github.com/uddinArsalan/ferry-proto/auth";
 
 service AuthService {
   rpc Login(LoginRequest) returns (LoginResponse);

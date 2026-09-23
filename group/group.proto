@@ -2,17 +2,17 @@ syntax = "proto3";
 
 import "google/protobuf/empty.proto"; 
 import "google/protobuf/timestamp.proto"; 
-import "peer/peer.proto";
+import "registry.proto.peer";
 
 package registry.proto.group;
 
-option go_package = "github.com/uddinArsalan/ferry-proto/proto/group";
+option go_package = "github.com/uddinArsalan/ferry-proto/group";
 
 service GroupService {
 
   rpc CreateGroup(CreateGroupRequest) returns (Group); // create group
 
-  rpc GetGroupsForPeer(peer.PeerID) returns (Groups); // get groups of peer
+  rpc GetGroupsForPeer(registry.proto.peer.PeerID) returns (Groups); // get groups of peer
 
   rpc GetGroups(google.protobuf.Empty) returns (Groups); // get groups of user 
 

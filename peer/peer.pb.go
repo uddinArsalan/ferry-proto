@@ -279,7 +279,7 @@ const file_peer_peer_proto_rawDesc = "" +
 	"\vPeerService\x12U\n" +
 	"\fRegisterPeer\x12(.registry.proto.peer.RegisterPeerRequest\x1a\x1b.registry.proto.peer.PeerID\x12>\n" +
 	"\bGetPeers\x12\x16.google.protobuf.Empty\x1a\x1a.registry.proto.peer.Peers\x12A\n" +
-	"\aGetPeer\x12\x1b.registry.proto.peer.PeerID\x1a\x19.registry.proto.peer.PeerB0Z.github.com/uddinArsalan/ferry-proto/proto/peerb\x06proto3"
+	"\aGetPeer\x12\x1b.registry.proto.peer.PeerID\x1a\x19.registry.proto.peer.PeerB*Z(github.com/uddinArsalan/ferry-proto/peerb\x06proto3"
 
 var (
 	file_peer_peer_proto_rawDescOnce sync.Once
