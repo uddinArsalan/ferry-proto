@@ -2,12 +2,13 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.2
 // - protoc             v7.36.1
-// source: proto/group/group.proto
+// source: group/group.proto
 
 package group
 
 import (
 	context "context"
+	peer "github.com/uddinArsalan/ferry-proto/proto/peer"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -20,12 +21,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	GroupService_RegisterPeer_FullMethodName     = "/registry.proto.group.GroupService/RegisterPeer"
 	GroupService_CreateGroup_FullMethodName      = "/registry.proto.group.GroupService/CreateGroup"
 	GroupService_GetGroupsForPeer_FullMethodName = "/registry.proto.group.GroupService/GetGroupsForPeer"
 	GroupService_GetGroups_FullMethodName        = "/registry.proto.group.GroupService/GetGroups"
-	GroupService_GetPeers_FullMethodName         = "/registry.proto.group.GroupService/GetPeers"
-	GroupService_GetPeer_FullMethodName          = "/registry.proto.group.GroupService/GetPeer"
 	GroupService_GetGroup_FullMethodName         = "/registry.proto.group.GroupService/GetGroup"
 )
 
@@ -33,12 +31,9 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type GroupServiceClient interface {
-	RegisterPeer(ctx context.Context, in *Peer, opts ...grpc.CallOption) (*Peer, error)
-	CreateGroup(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*Group, error)
-	GetGroupsForPeer(ctx context.Context, in *PeerID, opts ...grpc.CallOption) (*Groups, error)
+	CreateGroup(ctx context.Context, in *CreateGroupRequest, opts ...grpc.CallOption) (*Group, error)
+	GetGroupsForPeer(ctx context.Context, in *peer.PeerID, opts ...grpc.CallOption) (*Groups, error)
 	GetGroups(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*Groups, error)
-	GetPeers(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*Peers, error)
-	GetPeer(ctx context.Context, in *PeerID, opts ...grpc.CallOption) (*Peer, error)
 	GetGroup(ctx context.Context, in *GroupID, opts ...grpc.CallOption) (*Group, error)
 }
 
@@ -50,17 +45,7 @@ func NewGroupServiceClient(cc grpc.ClientConnInterface) GroupServiceClient {
 	return &groupServiceClient{cc}
 }
 
-func (c *groupServiceClient) RegisterPeer(ctx context.Context, in *Peer, opts ...grpc.CallOption) (*Peer, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Peer)
-	err := c.cc.Invoke(ctx, GroupService_RegisterPeer_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *groupServiceClient) CreateGroup(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*Group, error) {
+func (c *groupServiceClient) CreateGroup(ctx context.Context, in *CreateGroupRequest, opts ...grpc.CallOption) (*Group, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Group)
 	err := c.cc.Invoke(ctx, GroupService_CreateGroup_FullMethodName, in, out, cOpts...)
@@ -70,7 +55,7 @@ func (c *groupServiceClient) CreateGroup(ctx context.Context, in *emptypb.Empty,
 	return out, nil
 }
 
-func (c *groupServiceClient) GetGroupsForPeer(ctx context.Context, in *PeerID, opts ...grpc.CallOption) (*Groups, error) {
+func (c *groupServiceClient) GetGroupsForPeer(ctx context.Context, in *peer.PeerID, opts ...grpc.CallOption) (*Groups, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Groups)
 	err := c.cc.Invoke(ctx, GroupService_GetGroupsForPeer_FullMethodName, in, out, cOpts...)
@@ -84,26 +69,6 @@ func (c *groupServiceClient) GetGroups(ctx context.Context, in *emptypb.Empty, o
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Groups)
 	err := c.cc.Invoke(ctx, GroupService_GetGroups_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *groupServiceClient) GetPeers(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*Peers, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Peers)
-	err := c.cc.Invoke(ctx, GroupService_GetPeers_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *groupServiceClient) GetPeer(ctx context.Context, in *PeerID, opts ...grpc.CallOption) (*Peer, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Peer)
-	err := c.cc.Invoke(ctx, GroupService_GetPeer_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -124,12 +89,9 @@ func (c *groupServiceClient) GetGroup(ctx context.Context, in *GroupID, opts ...
 // All implementations must embed UnimplementedGroupServiceServer
 // for forward compatibility.
 type GroupServiceServer interface {
-	RegisterPeer(context.Context, *Peer) (*Peer, error)
-	CreateGroup(context.Context, *emptypb.Empty) (*Group, error)
-	GetGroupsForPeer(context.Context, *PeerID) (*Groups, error)
+	CreateGroup(context.Context, *CreateGroupRequest) (*Group, error)
+	GetGroupsForPeer(context.Context, *peer.PeerID) (*Groups, error)
 	GetGroups(context.Context, *emptypb.Empty) (*Groups, error)
-	GetPeers(context.Context, *emptypb.Empty) (*Peers, error)
-	GetPeer(context.Context, *PeerID) (*Peer, error)
 	GetGroup(context.Context, *GroupID) (*Group, error)
 	mustEmbedUnimplementedGroupServiceServer()
 }
@@ -141,23 +103,14 @@ type GroupServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedGroupServiceServer struct{}
 
-func (UnimplementedGroupServiceServer) RegisterPeer(context.Context, *Peer) (*Peer, error) {
-	return nil, status.Error(codes.Unimplemented, "method RegisterPeer not implemented")
-}
-func (UnimplementedGroupServiceServer) CreateGroup(context.Context, *emptypb.Empty) (*Group, error) {
+func (UnimplementedGroupServiceServer) CreateGroup(context.Context, *CreateGroupRequest) (*Group, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateGroup not implemented")
 }
-func (UnimplementedGroupServiceServer) GetGroupsForPeer(context.Context, *PeerID) (*Groups, error) {
+func (UnimplementedGroupServiceServer) GetGroupsForPeer(context.Context, *peer.PeerID) (*Groups, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetGroupsForPeer not implemented")
 }
 func (UnimplementedGroupServiceServer) GetGroups(context.Context, *emptypb.Empty) (*Groups, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetGroups not implemented")
-}
-func (UnimplementedGroupServiceServer) GetPeers(context.Context, *emptypb.Empty) (*Peers, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetPeers not implemented")
-}
-func (UnimplementedGroupServiceServer) GetPeer(context.Context, *PeerID) (*Peer, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetPeer not implemented")
 }
 func (UnimplementedGroupServiceServer) GetGroup(context.Context, *GroupID) (*Group, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetGroup not implemented")
@@ -183,26 +136,8 @@ func RegisterGroupServiceServer(s grpc.ServiceRegistrar, srv GroupServiceServer)
 	s.RegisterService(&GroupService_ServiceDesc, srv)
 }
 
-func _GroupService_RegisterPeer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Peer)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GroupServiceServer).RegisterPeer(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: GroupService_RegisterPeer_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GroupServiceServer).RegisterPeer(ctx, req.(*Peer))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _GroupService_CreateGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
+	in := new(CreateGroupRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -214,13 +149,13 @@ func _GroupService_CreateGroup_Handler(srv interface{}, ctx context.Context, dec
 		FullMethod: GroupService_CreateGroup_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GroupServiceServer).CreateGroup(ctx, req.(*emptypb.Empty))
+		return srv.(GroupServiceServer).CreateGroup(ctx, req.(*CreateGroupRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _GroupService_GetGroupsForPeer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PeerID)
+	in := new(peer.PeerID)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -232,7 +167,7 @@ func _GroupService_GetGroupsForPeer_Handler(srv interface{}, ctx context.Context
 		FullMethod: GroupService_GetGroupsForPeer_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GroupServiceServer).GetGroupsForPeer(ctx, req.(*PeerID))
+		return srv.(GroupServiceServer).GetGroupsForPeer(ctx, req.(*peer.PeerID))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -251,42 +186,6 @@ func _GroupService_GetGroups_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GroupServiceServer).GetGroups(ctx, req.(*emptypb.Empty))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _GroupService_GetPeers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GroupServiceServer).GetPeers(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: GroupService_GetPeers_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GroupServiceServer).GetPeers(ctx, req.(*emptypb.Empty))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _GroupService_GetPeer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PeerID)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GroupServiceServer).GetPeer(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: GroupService_GetPeer_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GroupServiceServer).GetPeer(ctx, req.(*PeerID))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -317,10 +216,6 @@ var GroupService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*GroupServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "RegisterPeer",
-			Handler:    _GroupService_RegisterPeer_Handler,
-		},
-		{
 			MethodName: "CreateGroup",
 			Handler:    _GroupService_CreateGroup_Handler,
 		},
@@ -333,18 +228,10 @@ var GroupService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _GroupService_GetGroups_Handler,
 		},
 		{
-			MethodName: "GetPeers",
-			Handler:    _GroupService_GetPeers_Handler,
-		},
-		{
-			MethodName: "GetPeer",
-			Handler:    _GroupService_GetPeer_Handler,
-		},
-		{
 			MethodName: "GetGroup",
 			Handler:    _GroupService_GetGroup_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/group/group.proto",
+	Metadata: "group/group.proto",
 }
