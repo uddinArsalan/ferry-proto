@@ -1,22 +1,22 @@
 syntax = "proto3";
 
-import "google/protobuf/timestamp.proto"; 
-import "google/protobuf/empty.proto"; 
-
 package registry.proto.peer;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/uddinArsalan/ferry-proto/peer";
 
 service PeerService {
-    rpc RegisterPeer(RegisterPeerRequest) returns(PeerID);
-    rpc GetPeers(google.protobuf.Empty) returns (Peers); // return all peers belonging to user
-    rpc GetPeer(PeerID) returns (Peer);
+  rpc RegisterPeer(RegisterPeerRequest) returns (PeerID);
+  rpc GetPeers(google.protobuf.Empty) returns (Peers); // return all peers belonging to user
+  rpc GetPeer(PeerID) returns (Peer);
 }
 
 message RegisterPeerRequest {
-   string name = 1;
-   string address = 2;
-   uint32 port = 3;
+  string name = 1;
+  string address = 2;
+  uint32 port = 3;
 }
 
 message PeerID {
