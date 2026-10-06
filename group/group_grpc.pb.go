@@ -31,7 +31,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type GroupServiceClient interface {
-	CreateGroup(ctx context.Context, in *CreateGroupRequest, opts ...grpc.CallOption) (*Group, error)
+	CreateGroup(ctx context.Context, in *CreateGroupRequest, opts ...grpc.CallOption) (*GroupID, error)
 	GetGroupsForPeer(ctx context.Context, in *peer.PeerID, opts ...grpc.CallOption) (*Groups, error)
 	GetGroups(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*Groups, error)
 	GetGroup(ctx context.Context, in *GroupID, opts ...grpc.CallOption) (*Group, error)
@@ -45,9 +45,9 @@ func NewGroupServiceClient(cc grpc.ClientConnInterface) GroupServiceClient {
 	return &groupServiceClient{cc}
 }
 
-func (c *groupServiceClient) CreateGroup(ctx context.Context, in *CreateGroupRequest, opts ...grpc.CallOption) (*Group, error) {
+func (c *groupServiceClient) CreateGroup(ctx context.Context, in *CreateGroupRequest, opts ...grpc.CallOption) (*GroupID, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Group)
+	out := new(GroupID)
 	err := c.cc.Invoke(ctx, GroupService_CreateGroup_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -89,7 +89,7 @@ func (c *groupServiceClient) GetGroup(ctx context.Context, in *GroupID, opts ...
 // All implementations must embed UnimplementedGroupServiceServer
 // for forward compatibility.
 type GroupServiceServer interface {
-	CreateGroup(context.Context, *CreateGroupRequest) (*Group, error)
+	CreateGroup(context.Context, *CreateGroupRequest) (*GroupID, error)
 	GetGroupsForPeer(context.Context, *peer.PeerID) (*Groups, error)
 	GetGroups(context.Context, *emptypb.Empty) (*Groups, error)
 	GetGroup(context.Context, *GroupID) (*Group, error)
@@ -103,7 +103,7 @@ type GroupServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedGroupServiceServer struct{}
 
-func (UnimplementedGroupServiceServer) CreateGroup(context.Context, *CreateGroupRequest) (*Group, error) {
+func (UnimplementedGroupServiceServer) CreateGroup(context.Context, *CreateGroupRequest) (*GroupID, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateGroup not implemented")
 }
 func (UnimplementedGroupServiceServer) GetGroupsForPeer(context.Context, *peer.PeerID) (*Groups, error) {

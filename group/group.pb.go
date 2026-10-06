@@ -116,7 +116,8 @@ type Group struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UserId        int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -163,6 +164,13 @@ func (x *Group) GetName() string {
 		return x.Name
 	}
 	return ""
+}
+
+func (x *Group) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
 }
 
 func (x *Group) GetCreatedAt() *timestamppb.Timestamp {
@@ -224,16 +232,17 @@ const file_group_group_proto_rawDesc = "" +
 	"\x12CreateGroupRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\"\x19\n" +
 	"\aGroupID\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"f\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"\x7f\n" +
 	"\x05Group\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x129\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x17\n" +
+	"\auser_id\x18\x03 \x01(\x03R\x06userId\x129\n" +
 	"\n" +
-	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"=\n" +
+	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"=\n" +
 	"\x06Groups\x123\n" +
-	"\x06groups\x18\x01 \x03(\v2\x1b.registry.proto.group.GroupR\x06groups2\xbe\x02\n" +
-	"\fGroupService\x12T\n" +
-	"\vCreateGroup\x12(.registry.proto.group.CreateGroupRequest\x1a\x1b.registry.proto.group.Group\x12M\n" +
+	"\x06groups\x18\x01 \x03(\v2\x1b.registry.proto.group.GroupR\x06groups2\xc0\x02\n" +
+	"\fGroupService\x12V\n" +
+	"\vCreateGroup\x12(.registry.proto.group.CreateGroupRequest\x1a\x1d.registry.proto.group.GroupID\x12M\n" +
 	"\x10GetGroupsForPeer\x12\x1b.registry.proto.peer.PeerID\x1a\x1c.registry.proto.group.Groups\x12A\n" +
 	"\tGetGroups\x12\x16.google.protobuf.Empty\x1a\x1c.registry.proto.group.Groups\x12F\n" +
 	"\bGetGroup\x12\x1d.registry.proto.group.GroupID\x1a\x1b.registry.proto.group.GroupB+Z)github.com/uddinArsalan/ferry-proto/groupb\x06proto3"
@@ -267,7 +276,7 @@ var file_group_group_proto_depIdxs = []int32{
 	5, // 3: registry.proto.group.GroupService.GetGroupsForPeer:input_type -> registry.proto.peer.PeerID
 	6, // 4: registry.proto.group.GroupService.GetGroups:input_type -> google.protobuf.Empty
 	1, // 5: registry.proto.group.GroupService.GetGroup:input_type -> registry.proto.group.GroupID
-	2, // 6: registry.proto.group.GroupService.CreateGroup:output_type -> registry.proto.group.Group
+	1, // 6: registry.proto.group.GroupService.CreateGroup:output_type -> registry.proto.group.GroupID
 	3, // 7: registry.proto.group.GroupService.GetGroupsForPeer:output_type -> registry.proto.group.Groups
 	3, // 8: registry.proto.group.GroupService.GetGroups:output_type -> registry.proto.group.Groups
 	2, // 9: registry.proto.group.GroupService.GetGroup:output_type -> registry.proto.group.Group
