@@ -17,6 +17,7 @@ message RegisterPeerRequest {
   string name = 1;
   string address = 2;
   uint32 port = 3;
+  string peer_id = 4;
 }
 
 message PeerID {
@@ -28,8 +29,9 @@ message Peer {
   string name = 2;
   string address = 3;
   uint32 port = 4;
-  google.protobuf.Timestamp last_seen = 5;
-  google.protobuf.Timestamp created_at = 6;
+  string peer_id = 5;
+  google.protobuf.Timestamp last_seen = 6;
+  google.protobuf.Timestamp created_at = 7;
 }
 
 message Peers {

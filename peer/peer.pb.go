@@ -28,6 +28,7 @@ type RegisterPeerRequest struct {
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	Address       string                 `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
 	Port          uint32                 `protobuf:"varint,3,opt,name=port,proto3" json:"port,omitempty"`
+	PeerId        string                 `protobuf:"bytes,4,opt,name=peer_id,json=peerId,proto3" json:"peer_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -83,6 +84,13 @@ func (x *RegisterPeerRequest) GetPort() uint32 {
 	return 0
 }
 
+func (x *RegisterPeerRequest) GetPeerId() string {
+	if x != nil {
+		return x.PeerId
+	}
+	return ""
+}
+
 type PeerID struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -133,8 +141,9 @@ type Peer struct {
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Address       string                 `protobuf:"bytes,3,opt,name=address,proto3" json:"address,omitempty"`
 	Port          uint32                 `protobuf:"varint,4,opt,name=port,proto3" json:"port,omitempty"`
-	LastSeen      *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=last_seen,json=lastSeen,proto3" json:"last_seen,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	PeerId        string                 `protobuf:"bytes,5,opt,name=peer_id,json=peerId,proto3" json:"peer_id,omitempty"`
+	LastSeen      *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=last_seen,json=lastSeen,proto3" json:"last_seen,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -195,6 +204,13 @@ func (x *Peer) GetPort() uint32 {
 		return x.Port
 	}
 	return 0
+}
+
+func (x *Peer) GetPeerId() string {
+	if x != nil {
+		return x.PeerId
+	}
+	return ""
 }
 
 func (x *Peer) GetLastSeen() *timestamppb.Timestamp {
@@ -259,21 +275,23 @@ var File_peer_peer_proto protoreflect.FileDescriptor
 
 const file_peer_peer_proto_rawDesc = "" +
 	"\n" +
-	"\x0fpeer/peer.proto\x12\x13registry.proto.peer\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"W\n" +
+	"\x0fpeer/peer.proto\x12\x13registry.proto.peer\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"p\n" +
 	"\x13RegisterPeerRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x18\n" +
 	"\aaddress\x18\x02 \x01(\tR\aaddress\x12\x12\n" +
-	"\x04port\x18\x03 \x01(\rR\x04port\"\x18\n" +
+	"\x04port\x18\x03 \x01(\rR\x04port\x12\x17\n" +
+	"\apeer_id\x18\x04 \x01(\tR\x06peerId\"\x18\n" +
 	"\x06PeerID\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"\xcc\x01\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"\xe5\x01\n" +
 	"\x04Peer\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x18\n" +
 	"\aaddress\x18\x03 \x01(\tR\aaddress\x12\x12\n" +
-	"\x04port\x18\x04 \x01(\rR\x04port\x127\n" +
-	"\tlast_seen\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\blastSeen\x129\n" +
+	"\x04port\x18\x04 \x01(\rR\x04port\x12\x17\n" +
+	"\apeer_id\x18\x05 \x01(\tR\x06peerId\x127\n" +
+	"\tlast_seen\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\blastSeen\x129\n" +
 	"\n" +
-	"created_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"8\n" +
+	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"8\n" +
 	"\x05Peers\x12/\n" +
 	"\x05peers\x18\x01 \x03(\v2\x19.registry.proto.peer.PeerR\x05peers2\xe7\x01\n" +
 	"\vPeerService\x12U\n" +
