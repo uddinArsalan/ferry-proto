@@ -19,9 +19,11 @@ service GroupService {
 }
 
 message CreateGroupRequest {
-  string name = 1;
+  string group_id = 1;
+  string name = 2;
 }
 
+// represent db group id
 message GroupID {
   int64 id = 1;
 }

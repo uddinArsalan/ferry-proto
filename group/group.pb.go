@@ -26,7 +26,8 @@ const (
 
 type CreateGroupRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	GroupId       string                 `protobuf:"bytes,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -61,6 +62,13 @@ func (*CreateGroupRequest) Descriptor() ([]byte, []int) {
 	return file_group_group_proto_rawDescGZIP(), []int{0}
 }
 
+func (x *CreateGroupRequest) GetGroupId() string {
+	if x != nil {
+		return x.GroupId
+	}
+	return ""
+}
+
 func (x *CreateGroupRequest) GetName() string {
 	if x != nil {
 		return x.Name
@@ -68,6 +76,7 @@ func (x *CreateGroupRequest) GetName() string {
 	return ""
 }
 
+// represent db group id
 type GroupID struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -236,9 +245,10 @@ var File_group_group_proto protoreflect.FileDescriptor
 
 const file_group_group_proto_rawDesc = "" +
 	"\n" +
-	"\x11group/group.proto\x12\x14registry.proto.group\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x0fpeer/peer.proto\"(\n" +
-	"\x12CreateGroupRequest\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\"\x19\n" +
+	"\x11group/group.proto\x12\x14registry.proto.group\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x0fpeer/peer.proto\"C\n" +
+	"\x12CreateGroupRequest\x12\x19\n" +
+	"\bgroup_id\x18\x01 \x01(\tR\agroupId\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\"\x19\n" +
 	"\aGroupID\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\"\x9a\x01\n" +
 	"\x05Group\x12\x0e\n" +
