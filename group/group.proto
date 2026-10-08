@@ -11,16 +11,20 @@ option go_package = "github.com/uddinArsalan/ferry-proto/group";
 service GroupService {
   rpc CreateGroup(CreateGroupRequest) returns (GroupID); // create group
 
-  rpc GetGroupsForPeer(registry.proto.peer.PeerID) returns (Groups); // get groups of peer
+  rpc GetGroupsForPeer(registry.proto.peer.GetPeerRequest) returns (Groups); // get groups of peer
 
   rpc GetGroups(google.protobuf.Empty) returns (Groups); // get groups of user
 
-  rpc GetGroup(GroupID) returns (Group);
+  rpc GetGroup(GetGroupRequest) returns (Group);
 }
 
 message CreateGroupRequest {
   string group_id = 1;
   string name = 2;
+}
+
+message GetGroupRequest {
+  string group_id = 1;
 }
 
 // represent db group id

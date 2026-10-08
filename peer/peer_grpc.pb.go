@@ -31,7 +31,7 @@ const (
 type PeerServiceClient interface {
 	RegisterPeer(ctx context.Context, in *RegisterPeerRequest, opts ...grpc.CallOption) (*PeerID, error)
 	GetPeers(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*Peers, error)
-	GetPeer(ctx context.Context, in *PeerID, opts ...grpc.CallOption) (*Peer, error)
+	GetPeer(ctx context.Context, in *GetPeerRequest, opts ...grpc.CallOption) (*Peer, error)
 }
 
 type peerServiceClient struct {
@@ -62,7 +62,7 @@ func (c *peerServiceClient) GetPeers(ctx context.Context, in *emptypb.Empty, opt
 	return out, nil
 }
 
-func (c *peerServiceClient) GetPeer(ctx context.Context, in *PeerID, opts ...grpc.CallOption) (*Peer, error) {
+func (c *peerServiceClient) GetPeer(ctx context.Context, in *GetPeerRequest, opts ...grpc.CallOption) (*Peer, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Peer)
 	err := c.cc.Invoke(ctx, PeerService_GetPeer_FullMethodName, in, out, cOpts...)
@@ -78,7 +78,7 @@ func (c *peerServiceClient) GetPeer(ctx context.Context, in *PeerID, opts ...grp
 type PeerServiceServer interface {
 	RegisterPeer(context.Context, *RegisterPeerRequest) (*PeerID, error)
 	GetPeers(context.Context, *emptypb.Empty) (*Peers, error)
-	GetPeer(context.Context, *PeerID) (*Peer, error)
+	GetPeer(context.Context, *GetPeerRequest) (*Peer, error)
 	mustEmbedUnimplementedPeerServiceServer()
 }
 
@@ -95,7 +95,7 @@ func (UnimplementedPeerServiceServer) RegisterPeer(context.Context, *RegisterPee
 func (UnimplementedPeerServiceServer) GetPeers(context.Context, *emptypb.Empty) (*Peers, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetPeers not implemented")
 }
-func (UnimplementedPeerServiceServer) GetPeer(context.Context, *PeerID) (*Peer, error) {
+func (UnimplementedPeerServiceServer) GetPeer(context.Context, *GetPeerRequest) (*Peer, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetPeer not implemented")
 }
 func (UnimplementedPeerServiceServer) mustEmbedUnimplementedPeerServiceServer() {}
@@ -156,7 +156,7 @@ func _PeerService_GetPeers_Handler(srv interface{}, ctx context.Context, dec fun
 }
 
 func _PeerService_GetPeer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PeerID)
+	in := new(GetPeerRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -168,7 +168,7 @@ func _PeerService_GetPeer_Handler(srv interface{}, ctx context.Context, dec func
 		FullMethod: PeerService_GetPeer_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PeerServiceServer).GetPeer(ctx, req.(*PeerID))
+		return srv.(PeerServiceServer).GetPeer(ctx, req.(*GetPeerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

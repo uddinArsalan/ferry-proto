@@ -10,7 +10,11 @@ option go_package = "github.com/uddinArsalan/ferry-proto/peer";
 service PeerService {
   rpc RegisterPeer(RegisterPeerRequest) returns (PeerID);
   rpc GetPeers(google.protobuf.Empty) returns (Peers); // return all peers belonging to user
-  rpc GetPeer(PeerID) returns (Peer);
+  rpc GetPeer(GetPeerRequest) returns (Peer);
+}
+
+message GetPeerRequest {
+  string peer_id = 1;
 }
 
 message RegisterPeerRequest {
