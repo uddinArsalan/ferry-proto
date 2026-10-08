@@ -115,9 +115,10 @@ func (x *GroupID) GetId() int64 {
 type Group struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	UserId        int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	GroupId       string                 `protobuf:"bytes,2,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
+	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	UserId        int64                  `protobuf:"varint,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -157,6 +158,13 @@ func (x *Group) GetId() int64 {
 		return x.Id
 	}
 	return 0
+}
+
+func (x *Group) GetGroupId() string {
+	if x != nil {
+		return x.GroupId
+	}
+	return ""
 }
 
 func (x *Group) GetName() string {
@@ -232,13 +240,14 @@ const file_group_group_proto_rawDesc = "" +
 	"\x12CreateGroupRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\"\x19\n" +
 	"\aGroupID\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"\x7f\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"\x9a\x01\n" +
 	"\x05Group\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12\x17\n" +
-	"\auser_id\x18\x03 \x01(\x03R\x06userId\x129\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x19\n" +
+	"\bgroup_id\x18\x02 \x01(\tR\agroupId\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12\x17\n" +
+	"\auser_id\x18\x04 \x01(\x03R\x06userId\x129\n" +
 	"\n" +
-	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"=\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"=\n" +
 	"\x06Groups\x123\n" +
 	"\x06groups\x18\x01 \x03(\v2\x1b.registry.proto.group.GroupR\x06groups2\xc0\x02\n" +
 	"\fGroupService\x12V\n" +

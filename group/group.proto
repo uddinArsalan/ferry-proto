@@ -28,9 +28,10 @@ message GroupID {
 
 message Group {
   int64 id = 1;
-  string name = 2;
-  int64 user_id = 3;
-  google.protobuf.Timestamp created_at = 4;
+  string group_id = 2;
+  string name = 3;
+  int64 user_id = 4;
+  google.protobuf.Timestamp created_at = 5;
 }
 
 message Groups {
