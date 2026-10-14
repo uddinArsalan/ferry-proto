@@ -16,6 +16,8 @@ service GroupService {
   rpc GetGroups(google.protobuf.Empty) returns (Groups); // get groups of user
 
   rpc GetGroup(GetGroupRequest) returns (Group);
+
+  rpc CreatePeerMembership(CreatePeerMembershipRequest) returns (google.protobuf.Empty);
 }
 
 message CreateGroupRequest {
@@ -25,6 +27,18 @@ message CreateGroupRequest {
 
 message GetGroupRequest {
   string group_id = 1;
+}
+
+enum PeerRole {
+  OWNER = 0;
+  ADMIN = 1;
+  MEMBER = 2;
+}
+
+message CreatePeerMembershipRequest {
+  string group_id = 1; // represent local peer and group ids
+  string peer_id = 2;
+  PeerRole role = 3;
 }
 
 // represent db group id

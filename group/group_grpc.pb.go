@@ -21,10 +21,11 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	GroupService_CreateGroup_FullMethodName      = "/registry.proto.group.GroupService/CreateGroup"
-	GroupService_GetGroupsForPeer_FullMethodName = "/registry.proto.group.GroupService/GetGroupsForPeer"
-	GroupService_GetGroups_FullMethodName        = "/registry.proto.group.GroupService/GetGroups"
-	GroupService_GetGroup_FullMethodName         = "/registry.proto.group.GroupService/GetGroup"
+	GroupService_CreateGroup_FullMethodName          = "/registry.proto.group.GroupService/CreateGroup"
+	GroupService_GetGroupsForPeer_FullMethodName     = "/registry.proto.group.GroupService/GetGroupsForPeer"
+	GroupService_GetGroups_FullMethodName            = "/registry.proto.group.GroupService/GetGroups"
+	GroupService_GetGroup_FullMethodName             = "/registry.proto.group.GroupService/GetGroup"
+	GroupService_CreatePeerMembership_FullMethodName = "/registry.proto.group.GroupService/CreatePeerMembership"
 )
 
 // GroupServiceClient is the client API for GroupService service.
@@ -35,6 +36,7 @@ type GroupServiceClient interface {
 	GetGroupsForPeer(ctx context.Context, in *peer.GetPeerRequest, opts ...grpc.CallOption) (*Groups, error)
 	GetGroups(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*Groups, error)
 	GetGroup(ctx context.Context, in *GetGroupRequest, opts ...grpc.CallOption) (*Group, error)
+	CreatePeerMembership(ctx context.Context, in *CreatePeerMembershipRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type groupServiceClient struct {
@@ -85,6 +87,16 @@ func (c *groupServiceClient) GetGroup(ctx context.Context, in *GetGroupRequest, 
 	return out, nil
 }
 
+func (c *groupServiceClient) CreatePeerMembership(ctx context.Context, in *CreatePeerMembershipRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, GroupService_CreatePeerMembership_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GroupServiceServer is the server API for GroupService service.
 // All implementations must embed UnimplementedGroupServiceServer
 // for forward compatibility.
@@ -93,6 +105,7 @@ type GroupServiceServer interface {
 	GetGroupsForPeer(context.Context, *peer.GetPeerRequest) (*Groups, error)
 	GetGroups(context.Context, *emptypb.Empty) (*Groups, error)
 	GetGroup(context.Context, *GetGroupRequest) (*Group, error)
+	CreatePeerMembership(context.Context, *CreatePeerMembershipRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedGroupServiceServer()
 }
 
@@ -114,6 +127,9 @@ func (UnimplementedGroupServiceServer) GetGroups(context.Context, *emptypb.Empty
 }
 func (UnimplementedGroupServiceServer) GetGroup(context.Context, *GetGroupRequest) (*Group, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetGroup not implemented")
+}
+func (UnimplementedGroupServiceServer) CreatePeerMembership(context.Context, *CreatePeerMembershipRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreatePeerMembership not implemented")
 }
 func (UnimplementedGroupServiceServer) mustEmbedUnimplementedGroupServiceServer() {}
 func (UnimplementedGroupServiceServer) testEmbeddedByValue()                      {}
@@ -208,6 +224,24 @@ func _GroupService_GetGroup_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _GroupService_CreatePeerMembership_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreatePeerMembershipRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GroupServiceServer).CreatePeerMembership(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GroupService_CreatePeerMembership_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GroupServiceServer).CreatePeerMembership(ctx, req.(*CreatePeerMembershipRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // GroupService_ServiceDesc is the grpc.ServiceDesc for GroupService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -230,6 +264,10 @@ var GroupService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetGroup",
 			Handler:    _GroupService_GetGroup_Handler,
+		},
+		{
+			MethodName: "CreatePeerMembership",
+			Handler:    _GroupService_CreatePeerMembership_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
