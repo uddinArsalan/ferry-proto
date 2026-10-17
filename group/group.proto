@@ -20,11 +20,92 @@ service GroupService {
   rpc CreateGroupPeerMembership(CreateGroupPeerMembershipRequest) returns (google.protobuf.Empty);
 
   rpc GetGroupPeerMembership(GetGroupPeerMembershipRequest) returns (GetGroupPeerMembershipResponse);
+
+  rpc CreateJoinRequest(CreateJoin) returns (google.protobuf.Empty); // create join req (invite/join)
+
+  // Invitations received by a peer
+  rpc GetAllPendingInvites(GetAllPendingRequest) returns (PendingInviteResponse);
+
+  // Invitations recieved by a peer for a group (at most 1, since only owner is allowed to do one pending at a time)
+  rpc GetGroupPendingInvite(GetGroupPendingRequest) returns (GetInviteRequestResponse);
+
+  // Join requests received by the owner
+  rpc GetAllPendingJoinRequestsForOwner(GetAllPendingRequest) returns (PendingJoinResponse);
+
+  // Join requests received by the owner for a particular group
+  rpc GetGroupPendingJoinRequestsForOwner(GetGroupPendingRequest) returns (PendingJoinResponse);
+
+  // Join requests sent by a peer
+  rpc GetAllPendingJoinRequestsBySender(GetAllPendingRequest) returns (PendingJoinResponse);
+
+  // Join requests sent by the peer for a particular group
+  rpc GetGroupPendingJoinRequestsBySender(GetGroupPendingRequest) returns (GetJoinRequestResponse);
 }
 
 message CreateGroupRequest {
   string group_id = 1;
   string name = 2;
+}
+
+enum JoinType {
+  INVITE = 0;
+  JOIN_REQUEST = 1;
+}
+
+enum INVITE_STATUS {
+  PENDING = 0;
+  ACCEPTED = 1;
+  REJECTED = 2;
+  CANCELLED = 3;
+}
+
+message CreateJoin {
+  string group_id = 1;
+  JoinType type = 2;
+  string sender_peer_id = 3;
+  string recipient_peer_id = 4;
+  INVITE_STATUS status = 5;
+}
+
+message GetAllPendingRequest {
+  string peer_id = 1;
+}
+
+message GetGroupPendingRequest {
+  string group_id = 1;
+  string peer_id = 2;
+}
+
+message GetJoinRequestResponse {
+  int64 request_id = 1;
+  string group_id = 2;
+  string group_name = 3;
+  JoinType type = 4;
+  string sender_peer_id = 5;
+  string sender_peer_name = 6;
+  string recipient_peer_id = 7;
+  string recipient_peer_name = 8;
+  INVITE_STATUS status = 9;
+}
+
+message GetInviteRequestResponse {
+  int64 request_id = 1;
+  string group_id = 2;
+  string group_name = 3;
+  JoinType type = 4;
+  string sender_peer_id = 5;
+  string sender_peer_name = 6;
+  string recipient_peer_id = 7;
+  string recipient_peer_name = 8;
+  INVITE_STATUS status = 9;
+}
+
+message PendingJoinResponse {
+  repeated GetJoinRequestResponse pending_join_requests = 1;
+}
+
+message PendingInviteResponse {
+  repeated GetInviteRequestResponse pending_invite_requests = 1;
 }
 
 message GetGroupRequest {
