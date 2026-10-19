@@ -21,7 +21,7 @@ service GroupService {
 
   rpc GetGroupPeerMembership(GetGroupPeerMembershipRequest) returns (GetGroupPeerMembershipResponse);
 
-  rpc GetJoinRequest(GetJoin) returns (GetJoin);
+  rpc GetJoinRequest(GetJoinReq) returns (GetJoinRequestResponse);
   rpc CreateJoinRequest(CreateJoin) returns (google.protobuf.Empty); // create join req (invite/join)
   rpc UpdateJoinRequestStatus(UpdateJoin) returns (google.protobuf.Empty); // update join req (invite/join) status
 
@@ -61,7 +61,11 @@ enum INVITE_STATUS {
   CANCELLED = 3;
 }
 
-message GetJoin {
+message GetJoinReq {
+  int64 request_id = 1;
+}
+
+message GetJoinResponse {
   int64 request_id = 1;
   string group_id = 2;
   JoinType type = 3;
