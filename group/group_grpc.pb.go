@@ -28,6 +28,7 @@ const (
 	GroupService_CreateGroupPeerMembership_FullMethodName           = "/registry.proto.group.GroupService/CreateGroupPeerMembership"
 	GroupService_GetGroupPeerMembership_FullMethodName              = "/registry.proto.group.GroupService/GetGroupPeerMembership"
 	GroupService_CreateJoinRequest_FullMethodName                   = "/registry.proto.group.GroupService/CreateJoinRequest"
+	GroupService_UpdateJoinRequestStatus_FullMethodName             = "/registry.proto.group.GroupService/UpdateJoinRequestStatus"
 	GroupService_GetAllPendingInvites_FullMethodName                = "/registry.proto.group.GroupService/GetAllPendingInvites"
 	GroupService_GetGroupPendingInvite_FullMethodName               = "/registry.proto.group.GroupService/GetGroupPendingInvite"
 	GroupService_GetAllPendingJoinRequestsForOwner_FullMethodName   = "/registry.proto.group.GroupService/GetAllPendingJoinRequestsForOwner"
@@ -47,6 +48,7 @@ type GroupServiceClient interface {
 	CreateGroupPeerMembership(ctx context.Context, in *CreateGroupPeerMembershipRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	GetGroupPeerMembership(ctx context.Context, in *GetGroupPeerMembershipRequest, opts ...grpc.CallOption) (*GetGroupPeerMembershipResponse, error)
 	CreateJoinRequest(ctx context.Context, in *CreateJoin, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdateJoinRequestStatus(ctx context.Context, in *UpdateJoin, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Invitations received by a peer
 	GetAllPendingInvites(ctx context.Context, in *GetAllPendingRequest, opts ...grpc.CallOption) (*PendingInviteResponse, error)
 	// Invitations recieved by a peer for a group (at most 1, since only owner is allowed to do one pending at a time)
@@ -139,6 +141,16 @@ func (c *groupServiceClient) CreateJoinRequest(ctx context.Context, in *CreateJo
 	return out, nil
 }
 
+func (c *groupServiceClient) UpdateJoinRequestStatus(ctx context.Context, in *UpdateJoin, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, GroupService_UpdateJoinRequestStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *groupServiceClient) GetAllPendingInvites(ctx context.Context, in *GetAllPendingRequest, opts ...grpc.CallOption) (*PendingInviteResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(PendingInviteResponse)
@@ -210,6 +222,7 @@ type GroupServiceServer interface {
 	CreateGroupPeerMembership(context.Context, *CreateGroupPeerMembershipRequest) (*emptypb.Empty, error)
 	GetGroupPeerMembership(context.Context, *GetGroupPeerMembershipRequest) (*GetGroupPeerMembershipResponse, error)
 	CreateJoinRequest(context.Context, *CreateJoin) (*emptypb.Empty, error)
+	UpdateJoinRequestStatus(context.Context, *UpdateJoin) (*emptypb.Empty, error)
 	// Invitations received by a peer
 	GetAllPendingInvites(context.Context, *GetAllPendingRequest) (*PendingInviteResponse, error)
 	// Invitations recieved by a peer for a group (at most 1, since only owner is allowed to do one pending at a time)
@@ -252,6 +265,9 @@ func (UnimplementedGroupServiceServer) GetGroupPeerMembership(context.Context, *
 }
 func (UnimplementedGroupServiceServer) CreateJoinRequest(context.Context, *CreateJoin) (*emptypb.Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateJoinRequest not implemented")
+}
+func (UnimplementedGroupServiceServer) UpdateJoinRequestStatus(context.Context, *UpdateJoin) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateJoinRequestStatus not implemented")
 }
 func (UnimplementedGroupServiceServer) GetAllPendingInvites(context.Context, *GetAllPendingRequest) (*PendingInviteResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetAllPendingInvites not implemented")
@@ -418,6 +434,24 @@ func _GroupService_CreateJoinRequest_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _GroupService_UpdateJoinRequestStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateJoin)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GroupServiceServer).UpdateJoinRequestStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GroupService_UpdateJoinRequestStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GroupServiceServer).UpdateJoinRequestStatus(ctx, req.(*UpdateJoin))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _GroupService_GetAllPendingInvites_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetAllPendingRequest)
 	if err := dec(in); err != nil {
@@ -560,6 +594,10 @@ var GroupService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateJoinRequest",
 			Handler:    _GroupService_CreateJoinRequest_Handler,
+		},
+		{
+			MethodName: "UpdateJoinRequestStatus",
+			Handler:    _GroupService_UpdateJoinRequestStatus_Handler,
 		},
 		{
 			MethodName: "GetAllPendingInvites",

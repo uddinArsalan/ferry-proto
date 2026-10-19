@@ -22,6 +22,7 @@ service GroupService {
   rpc GetGroupPeerMembership(GetGroupPeerMembershipRequest) returns (GetGroupPeerMembershipResponse);
 
   rpc CreateJoinRequest(CreateJoin) returns (google.protobuf.Empty); // create join req (invite/join)
+  rpc UpdateJoinRequestStatus(UpdateJoin) returns (google.protobuf.Empty); // update join req (invite/join) status
 
   // Invitations received by a peer
   rpc GetAllPendingInvites(GetAllPendingRequest) returns (PendingInviteResponse);
@@ -65,6 +66,11 @@ message CreateJoin {
   string sender_peer_id = 3;
   string recipient_peer_id = 4;
   INVITE_STATUS status = 5;
+}
+
+message UpdateJoin {
+  int64 request_id = 1;
+  INVITE_STATUS status = 2;
 }
 
 message GetAllPendingRequest {

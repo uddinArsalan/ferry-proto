@@ -299,6 +299,58 @@ func (x *CreateJoin) GetStatus() INVITE_STATUS {
 	return INVITE_STATUS_PENDING
 }
 
+type UpdateJoin struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	RequestId     int64                  `protobuf:"varint,1,opt,name=request_id,json=requestId,proto3" json:"request_id,omitempty"`
+	Status        INVITE_STATUS          `protobuf:"varint,2,opt,name=status,proto3,enum=registry.proto.group.INVITE_STATUS" json:"status,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateJoin) Reset() {
+	*x = UpdateJoin{}
+	mi := &file_group_group_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateJoin) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateJoin) ProtoMessage() {}
+
+func (x *UpdateJoin) ProtoReflect() protoreflect.Message {
+	mi := &file_group_group_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateJoin.ProtoReflect.Descriptor instead.
+func (*UpdateJoin) Descriptor() ([]byte, []int) {
+	return file_group_group_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *UpdateJoin) GetRequestId() int64 {
+	if x != nil {
+		return x.RequestId
+	}
+	return 0
+}
+
+func (x *UpdateJoin) GetStatus() INVITE_STATUS {
+	if x != nil {
+		return x.Status
+	}
+	return INVITE_STATUS_PENDING
+}
+
 type GetAllPendingRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	PeerId        string                 `protobuf:"bytes,1,opt,name=peer_id,json=peerId,proto3" json:"peer_id,omitempty"`
@@ -308,7 +360,7 @@ type GetAllPendingRequest struct {
 
 func (x *GetAllPendingRequest) Reset() {
 	*x = GetAllPendingRequest{}
-	mi := &file_group_group_proto_msgTypes[2]
+	mi := &file_group_group_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -320,7 +372,7 @@ func (x *GetAllPendingRequest) String() string {
 func (*GetAllPendingRequest) ProtoMessage() {}
 
 func (x *GetAllPendingRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_group_group_proto_msgTypes[2]
+	mi := &file_group_group_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -333,7 +385,7 @@ func (x *GetAllPendingRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAllPendingRequest.ProtoReflect.Descriptor instead.
 func (*GetAllPendingRequest) Descriptor() ([]byte, []int) {
-	return file_group_group_proto_rawDescGZIP(), []int{2}
+	return file_group_group_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *GetAllPendingRequest) GetPeerId() string {
@@ -353,7 +405,7 @@ type GetGroupPendingRequest struct {
 
 func (x *GetGroupPendingRequest) Reset() {
 	*x = GetGroupPendingRequest{}
-	mi := &file_group_group_proto_msgTypes[3]
+	mi := &file_group_group_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -365,7 +417,7 @@ func (x *GetGroupPendingRequest) String() string {
 func (*GetGroupPendingRequest) ProtoMessage() {}
 
 func (x *GetGroupPendingRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_group_group_proto_msgTypes[3]
+	mi := &file_group_group_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -378,7 +430,7 @@ func (x *GetGroupPendingRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetGroupPendingRequest.ProtoReflect.Descriptor instead.
 func (*GetGroupPendingRequest) Descriptor() ([]byte, []int) {
-	return file_group_group_proto_rawDescGZIP(), []int{3}
+	return file_group_group_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *GetGroupPendingRequest) GetGroupId() string {
@@ -412,7 +464,7 @@ type GetJoinRequestResponse struct {
 
 func (x *GetJoinRequestResponse) Reset() {
 	*x = GetJoinRequestResponse{}
-	mi := &file_group_group_proto_msgTypes[4]
+	mi := &file_group_group_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -424,7 +476,7 @@ func (x *GetJoinRequestResponse) String() string {
 func (*GetJoinRequestResponse) ProtoMessage() {}
 
 func (x *GetJoinRequestResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_group_group_proto_msgTypes[4]
+	mi := &file_group_group_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -437,7 +489,7 @@ func (x *GetJoinRequestResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetJoinRequestResponse.ProtoReflect.Descriptor instead.
 func (*GetJoinRequestResponse) Descriptor() ([]byte, []int) {
-	return file_group_group_proto_rawDescGZIP(), []int{4}
+	return file_group_group_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *GetJoinRequestResponse) GetRequestId() int64 {
@@ -520,7 +572,7 @@ type GetInviteRequestResponse struct {
 
 func (x *GetInviteRequestResponse) Reset() {
 	*x = GetInviteRequestResponse{}
-	mi := &file_group_group_proto_msgTypes[5]
+	mi := &file_group_group_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -532,7 +584,7 @@ func (x *GetInviteRequestResponse) String() string {
 func (*GetInviteRequestResponse) ProtoMessage() {}
 
 func (x *GetInviteRequestResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_group_group_proto_msgTypes[5]
+	mi := &file_group_group_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -545,7 +597,7 @@ func (x *GetInviteRequestResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetInviteRequestResponse.ProtoReflect.Descriptor instead.
 func (*GetInviteRequestResponse) Descriptor() ([]byte, []int) {
-	return file_group_group_proto_rawDescGZIP(), []int{5}
+	return file_group_group_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *GetInviteRequestResponse) GetRequestId() int64 {
@@ -620,7 +672,7 @@ type PendingJoinResponse struct {
 
 func (x *PendingJoinResponse) Reset() {
 	*x = PendingJoinResponse{}
-	mi := &file_group_group_proto_msgTypes[6]
+	mi := &file_group_group_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -632,7 +684,7 @@ func (x *PendingJoinResponse) String() string {
 func (*PendingJoinResponse) ProtoMessage() {}
 
 func (x *PendingJoinResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_group_group_proto_msgTypes[6]
+	mi := &file_group_group_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -645,7 +697,7 @@ func (x *PendingJoinResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PendingJoinResponse.ProtoReflect.Descriptor instead.
 func (*PendingJoinResponse) Descriptor() ([]byte, []int) {
-	return file_group_group_proto_rawDescGZIP(), []int{6}
+	return file_group_group_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *PendingJoinResponse) GetPendingJoinRequests() []*GetJoinRequestResponse {
@@ -664,7 +716,7 @@ type PendingInviteResponse struct {
 
 func (x *PendingInviteResponse) Reset() {
 	*x = PendingInviteResponse{}
-	mi := &file_group_group_proto_msgTypes[7]
+	mi := &file_group_group_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -676,7 +728,7 @@ func (x *PendingInviteResponse) String() string {
 func (*PendingInviteResponse) ProtoMessage() {}
 
 func (x *PendingInviteResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_group_group_proto_msgTypes[7]
+	mi := &file_group_group_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -689,7 +741,7 @@ func (x *PendingInviteResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PendingInviteResponse.ProtoReflect.Descriptor instead.
 func (*PendingInviteResponse) Descriptor() ([]byte, []int) {
-	return file_group_group_proto_rawDescGZIP(), []int{7}
+	return file_group_group_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *PendingInviteResponse) GetPendingInviteRequests() []*GetInviteRequestResponse {
@@ -708,7 +760,7 @@ type GetGroupRequest struct {
 
 func (x *GetGroupRequest) Reset() {
 	*x = GetGroupRequest{}
-	mi := &file_group_group_proto_msgTypes[8]
+	mi := &file_group_group_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -720,7 +772,7 @@ func (x *GetGroupRequest) String() string {
 func (*GetGroupRequest) ProtoMessage() {}
 
 func (x *GetGroupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_group_group_proto_msgTypes[8]
+	mi := &file_group_group_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -733,7 +785,7 @@ func (x *GetGroupRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetGroupRequest.ProtoReflect.Descriptor instead.
 func (*GetGroupRequest) Descriptor() ([]byte, []int) {
-	return file_group_group_proto_rawDescGZIP(), []int{8}
+	return file_group_group_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *GetGroupRequest) GetGroupId() string {
@@ -754,7 +806,7 @@ type CreateGroupPeerMembershipRequest struct {
 
 func (x *CreateGroupPeerMembershipRequest) Reset() {
 	*x = CreateGroupPeerMembershipRequest{}
-	mi := &file_group_group_proto_msgTypes[9]
+	mi := &file_group_group_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -766,7 +818,7 @@ func (x *CreateGroupPeerMembershipRequest) String() string {
 func (*CreateGroupPeerMembershipRequest) ProtoMessage() {}
 
 func (x *CreateGroupPeerMembershipRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_group_group_proto_msgTypes[9]
+	mi := &file_group_group_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -779,7 +831,7 @@ func (x *CreateGroupPeerMembershipRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateGroupPeerMembershipRequest.ProtoReflect.Descriptor instead.
 func (*CreateGroupPeerMembershipRequest) Descriptor() ([]byte, []int) {
-	return file_group_group_proto_rawDescGZIP(), []int{9}
+	return file_group_group_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *CreateGroupPeerMembershipRequest) GetGroupId() string {
@@ -813,7 +865,7 @@ type GetGroupPeerMembershipRequest struct {
 
 func (x *GetGroupPeerMembershipRequest) Reset() {
 	*x = GetGroupPeerMembershipRequest{}
-	mi := &file_group_group_proto_msgTypes[10]
+	mi := &file_group_group_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -825,7 +877,7 @@ func (x *GetGroupPeerMembershipRequest) String() string {
 func (*GetGroupPeerMembershipRequest) ProtoMessage() {}
 
 func (x *GetGroupPeerMembershipRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_group_group_proto_msgTypes[10]
+	mi := &file_group_group_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -838,7 +890,7 @@ func (x *GetGroupPeerMembershipRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetGroupPeerMembershipRequest.ProtoReflect.Descriptor instead.
 func (*GetGroupPeerMembershipRequest) Descriptor() ([]byte, []int) {
-	return file_group_group_proto_rawDescGZIP(), []int{10}
+	return file_group_group_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *GetGroupPeerMembershipRequest) GetGroupId() string {
@@ -867,7 +919,7 @@ type GetGroupPeerMembershipResponse struct {
 
 func (x *GetGroupPeerMembershipResponse) Reset() {
 	*x = GetGroupPeerMembershipResponse{}
-	mi := &file_group_group_proto_msgTypes[11]
+	mi := &file_group_group_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -879,7 +931,7 @@ func (x *GetGroupPeerMembershipResponse) String() string {
 func (*GetGroupPeerMembershipResponse) ProtoMessage() {}
 
 func (x *GetGroupPeerMembershipResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_group_group_proto_msgTypes[11]
+	mi := &file_group_group_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -892,7 +944,7 @@ func (x *GetGroupPeerMembershipResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetGroupPeerMembershipResponse.ProtoReflect.Descriptor instead.
 func (*GetGroupPeerMembershipResponse) Descriptor() ([]byte, []int) {
-	return file_group_group_proto_rawDescGZIP(), []int{11}
+	return file_group_group_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *GetGroupPeerMembershipResponse) GetPeerId() int64 {
@@ -933,7 +985,7 @@ type GroupID struct {
 
 func (x *GroupID) Reset() {
 	*x = GroupID{}
-	mi := &file_group_group_proto_msgTypes[12]
+	mi := &file_group_group_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -945,7 +997,7 @@ func (x *GroupID) String() string {
 func (*GroupID) ProtoMessage() {}
 
 func (x *GroupID) ProtoReflect() protoreflect.Message {
-	mi := &file_group_group_proto_msgTypes[12]
+	mi := &file_group_group_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -958,7 +1010,7 @@ func (x *GroupID) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GroupID.ProtoReflect.Descriptor instead.
 func (*GroupID) Descriptor() ([]byte, []int) {
-	return file_group_group_proto_rawDescGZIP(), []int{12}
+	return file_group_group_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *GroupID) GetId() int64 {
@@ -981,7 +1033,7 @@ type Group struct {
 
 func (x *Group) Reset() {
 	*x = Group{}
-	mi := &file_group_group_proto_msgTypes[13]
+	mi := &file_group_group_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -993,7 +1045,7 @@ func (x *Group) String() string {
 func (*Group) ProtoMessage() {}
 
 func (x *Group) ProtoReflect() protoreflect.Message {
-	mi := &file_group_group_proto_msgTypes[13]
+	mi := &file_group_group_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1006,7 +1058,7 @@ func (x *Group) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Group.ProtoReflect.Descriptor instead.
 func (*Group) Descriptor() ([]byte, []int) {
-	return file_group_group_proto_rawDescGZIP(), []int{13}
+	return file_group_group_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *Group) GetId() int64 {
@@ -1053,7 +1105,7 @@ type Groups struct {
 
 func (x *Groups) Reset() {
 	*x = Groups{}
-	mi := &file_group_group_proto_msgTypes[14]
+	mi := &file_group_group_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1065,7 +1117,7 @@ func (x *Groups) String() string {
 func (*Groups) ProtoMessage() {}
 
 func (x *Groups) ProtoReflect() protoreflect.Message {
-	mi := &file_group_group_proto_msgTypes[14]
+	mi := &file_group_group_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1078,7 +1130,7 @@ func (x *Groups) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Groups.ProtoReflect.Descriptor instead.
 func (*Groups) Descriptor() ([]byte, []int) {
-	return file_group_group_proto_rawDescGZIP(), []int{14}
+	return file_group_group_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *Groups) GetGroups() []*Group {
@@ -1102,7 +1154,12 @@ const file_group_group_proto_rawDesc = "" +
 	"\x04type\x18\x02 \x01(\x0e2\x1e.registry.proto.group.JoinTypeR\x04type\x12$\n" +
 	"\x0esender_peer_id\x18\x03 \x01(\tR\fsenderPeerId\x12*\n" +
 	"\x11recipient_peer_id\x18\x04 \x01(\tR\x0frecipientPeerId\x12;\n" +
-	"\x06status\x18\x05 \x01(\x0e2#.registry.proto.group.INVITE_STATUSR\x06status\"/\n" +
+	"\x06status\x18\x05 \x01(\x0e2#.registry.proto.group.INVITE_STATUSR\x06status\"h\n" +
+	"\n" +
+	"UpdateJoin\x12\x1d\n" +
+	"\n" +
+	"request_id\x18\x01 \x01(\x03R\trequestId\x12;\n" +
+	"\x06status\x18\x02 \x01(\x0e2#.registry.proto.group.INVITE_STATUSR\x06status\"/\n" +
 	"\x14GetAllPendingRequest\x12\x17\n" +
 	"\apeer_id\x18\x01 \x01(\tR\x06peerId\"L\n" +
 	"\x16GetGroupPendingRequest\x12\x19\n" +
@@ -1174,8 +1231,7 @@ const file_group_group_proto_rawDesc = "" +
 	"\x05OWNER\x10\x00\x12\t\n" +
 	"\x05ADMIN\x10\x01\x12\n" +
 	"\n" +
-	"\x06MEMBER\x10\x022\xf6\n" +
-	"\n" +
+	"\x06MEMBER\x10\x022\xcb\v\n" +
 	"\fGroupService\x12V\n" +
 	"\vCreateGroup\x12(.registry.proto.group.CreateGroupRequest\x1a\x1d.registry.proto.group.GroupID\x12U\n" +
 	"\x10GetGroupsForPeer\x12#.registry.proto.peer.GetPeerRequest\x1a\x1c.registry.proto.group.Groups\x12A\n" +
@@ -1183,7 +1239,8 @@ const file_group_group_proto_rawDesc = "" +
 	"\bGetGroup\x12%.registry.proto.group.GetGroupRequest\x1a\x1b.registry.proto.group.Group\x12k\n" +
 	"\x19CreateGroupPeerMembership\x126.registry.proto.group.CreateGroupPeerMembershipRequest\x1a\x16.google.protobuf.Empty\x12\x83\x01\n" +
 	"\x16GetGroupPeerMembership\x123.registry.proto.group.GetGroupPeerMembershipRequest\x1a4.registry.proto.group.GetGroupPeerMembershipResponse\x12M\n" +
-	"\x11CreateJoinRequest\x12 .registry.proto.group.CreateJoin\x1a\x16.google.protobuf.Empty\x12o\n" +
+	"\x11CreateJoinRequest\x12 .registry.proto.group.CreateJoin\x1a\x16.google.protobuf.Empty\x12S\n" +
+	"\x17UpdateJoinRequestStatus\x12 .registry.proto.group.UpdateJoin\x1a\x16.google.protobuf.Empty\x12o\n" +
 	"\x14GetAllPendingInvites\x12*.registry.proto.group.GetAllPendingRequest\x1a+.registry.proto.group.PendingInviteResponse\x12u\n" +
 	"\x15GetGroupPendingInvite\x12,.registry.proto.group.GetGroupPendingRequest\x1a..registry.proto.group.GetInviteRequestResponse\x12z\n" +
 	"!GetAllPendingJoinRequestsForOwner\x12*.registry.proto.group.GetAllPendingRequest\x1a).registry.proto.group.PendingJoinResponse\x12~\n" +
@@ -1204,75 +1261,79 @@ func file_group_group_proto_rawDescGZIP() []byte {
 }
 
 var file_group_group_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_group_group_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
+var file_group_group_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_group_group_proto_goTypes = []any{
 	(JoinType)(0),                            // 0: registry.proto.group.JoinType
 	(INVITE_STATUS)(0),                       // 1: registry.proto.group.INVITE_STATUS
 	(PeerRole)(0),                            // 2: registry.proto.group.PeerRole
 	(*CreateGroupRequest)(nil),               // 3: registry.proto.group.CreateGroupRequest
 	(*CreateJoin)(nil),                       // 4: registry.proto.group.CreateJoin
-	(*GetAllPendingRequest)(nil),             // 5: registry.proto.group.GetAllPendingRequest
-	(*GetGroupPendingRequest)(nil),           // 6: registry.proto.group.GetGroupPendingRequest
-	(*GetJoinRequestResponse)(nil),           // 7: registry.proto.group.GetJoinRequestResponse
-	(*GetInviteRequestResponse)(nil),         // 8: registry.proto.group.GetInviteRequestResponse
-	(*PendingJoinResponse)(nil),              // 9: registry.proto.group.PendingJoinResponse
-	(*PendingInviteResponse)(nil),            // 10: registry.proto.group.PendingInviteResponse
-	(*GetGroupRequest)(nil),                  // 11: registry.proto.group.GetGroupRequest
-	(*CreateGroupPeerMembershipRequest)(nil), // 12: registry.proto.group.CreateGroupPeerMembershipRequest
-	(*GetGroupPeerMembershipRequest)(nil),    // 13: registry.proto.group.GetGroupPeerMembershipRequest
-	(*GetGroupPeerMembershipResponse)(nil),   // 14: registry.proto.group.GetGroupPeerMembershipResponse
-	(*GroupID)(nil),                          // 15: registry.proto.group.GroupID
-	(*Group)(nil),                            // 16: registry.proto.group.Group
-	(*Groups)(nil),                           // 17: registry.proto.group.Groups
-	(*timestamppb.Timestamp)(nil),            // 18: google.protobuf.Timestamp
-	(*peer.GetPeerRequest)(nil),              // 19: registry.proto.peer.GetPeerRequest
-	(*emptypb.Empty)(nil),                    // 20: google.protobuf.Empty
+	(*UpdateJoin)(nil),                       // 5: registry.proto.group.UpdateJoin
+	(*GetAllPendingRequest)(nil),             // 6: registry.proto.group.GetAllPendingRequest
+	(*GetGroupPendingRequest)(nil),           // 7: registry.proto.group.GetGroupPendingRequest
+	(*GetJoinRequestResponse)(nil),           // 8: registry.proto.group.GetJoinRequestResponse
+	(*GetInviteRequestResponse)(nil),         // 9: registry.proto.group.GetInviteRequestResponse
+	(*PendingJoinResponse)(nil),              // 10: registry.proto.group.PendingJoinResponse
+	(*PendingInviteResponse)(nil),            // 11: registry.proto.group.PendingInviteResponse
+	(*GetGroupRequest)(nil),                  // 12: registry.proto.group.GetGroupRequest
+	(*CreateGroupPeerMembershipRequest)(nil), // 13: registry.proto.group.CreateGroupPeerMembershipRequest
+	(*GetGroupPeerMembershipRequest)(nil),    // 14: registry.proto.group.GetGroupPeerMembershipRequest
+	(*GetGroupPeerMembershipResponse)(nil),   // 15: registry.proto.group.GetGroupPeerMembershipResponse
+	(*GroupID)(nil),                          // 16: registry.proto.group.GroupID
+	(*Group)(nil),                            // 17: registry.proto.group.Group
+	(*Groups)(nil),                           // 18: registry.proto.group.Groups
+	(*timestamppb.Timestamp)(nil),            // 19: google.protobuf.Timestamp
+	(*peer.GetPeerRequest)(nil),              // 20: registry.proto.peer.GetPeerRequest
+	(*emptypb.Empty)(nil),                    // 21: google.protobuf.Empty
 }
 var file_group_group_proto_depIdxs = []int32{
 	0,  // 0: registry.proto.group.CreateJoin.type:type_name -> registry.proto.group.JoinType
 	1,  // 1: registry.proto.group.CreateJoin.status:type_name -> registry.proto.group.INVITE_STATUS
-	0,  // 2: registry.proto.group.GetJoinRequestResponse.type:type_name -> registry.proto.group.JoinType
-	1,  // 3: registry.proto.group.GetJoinRequestResponse.status:type_name -> registry.proto.group.INVITE_STATUS
-	0,  // 4: registry.proto.group.GetInviteRequestResponse.type:type_name -> registry.proto.group.JoinType
-	1,  // 5: registry.proto.group.GetInviteRequestResponse.status:type_name -> registry.proto.group.INVITE_STATUS
-	7,  // 6: registry.proto.group.PendingJoinResponse.pending_join_requests:type_name -> registry.proto.group.GetJoinRequestResponse
-	8,  // 7: registry.proto.group.PendingInviteResponse.pending_invite_requests:type_name -> registry.proto.group.GetInviteRequestResponse
-	2,  // 8: registry.proto.group.CreateGroupPeerMembershipRequest.role:type_name -> registry.proto.group.PeerRole
-	2,  // 9: registry.proto.group.GetGroupPeerMembershipResponse.role:type_name -> registry.proto.group.PeerRole
-	18, // 10: registry.proto.group.GetGroupPeerMembershipResponse.joined_at:type_name -> google.protobuf.Timestamp
-	18, // 11: registry.proto.group.Group.created_at:type_name -> google.protobuf.Timestamp
-	16, // 12: registry.proto.group.Groups.groups:type_name -> registry.proto.group.Group
-	3,  // 13: registry.proto.group.GroupService.CreateGroup:input_type -> registry.proto.group.CreateGroupRequest
-	19, // 14: registry.proto.group.GroupService.GetGroupsForPeer:input_type -> registry.proto.peer.GetPeerRequest
-	20, // 15: registry.proto.group.GroupService.GetGroups:input_type -> google.protobuf.Empty
-	11, // 16: registry.proto.group.GroupService.GetGroup:input_type -> registry.proto.group.GetGroupRequest
-	12, // 17: registry.proto.group.GroupService.CreateGroupPeerMembership:input_type -> registry.proto.group.CreateGroupPeerMembershipRequest
-	13, // 18: registry.proto.group.GroupService.GetGroupPeerMembership:input_type -> registry.proto.group.GetGroupPeerMembershipRequest
-	4,  // 19: registry.proto.group.GroupService.CreateJoinRequest:input_type -> registry.proto.group.CreateJoin
-	5,  // 20: registry.proto.group.GroupService.GetAllPendingInvites:input_type -> registry.proto.group.GetAllPendingRequest
-	6,  // 21: registry.proto.group.GroupService.GetGroupPendingInvite:input_type -> registry.proto.group.GetGroupPendingRequest
-	5,  // 22: registry.proto.group.GroupService.GetAllPendingJoinRequestsForOwner:input_type -> registry.proto.group.GetAllPendingRequest
-	6,  // 23: registry.proto.group.GroupService.GetGroupPendingJoinRequestsForOwner:input_type -> registry.proto.group.GetGroupPendingRequest
-	5,  // 24: registry.proto.group.GroupService.GetAllPendingJoinRequestsBySender:input_type -> registry.proto.group.GetAllPendingRequest
-	6,  // 25: registry.proto.group.GroupService.GetGroupPendingJoinRequestsBySender:input_type -> registry.proto.group.GetGroupPendingRequest
-	15, // 26: registry.proto.group.GroupService.CreateGroup:output_type -> registry.proto.group.GroupID
-	17, // 27: registry.proto.group.GroupService.GetGroupsForPeer:output_type -> registry.proto.group.Groups
-	17, // 28: registry.proto.group.GroupService.GetGroups:output_type -> registry.proto.group.Groups
-	16, // 29: registry.proto.group.GroupService.GetGroup:output_type -> registry.proto.group.Group
-	20, // 30: registry.proto.group.GroupService.CreateGroupPeerMembership:output_type -> google.protobuf.Empty
-	14, // 31: registry.proto.group.GroupService.GetGroupPeerMembership:output_type -> registry.proto.group.GetGroupPeerMembershipResponse
-	20, // 32: registry.proto.group.GroupService.CreateJoinRequest:output_type -> google.protobuf.Empty
-	10, // 33: registry.proto.group.GroupService.GetAllPendingInvites:output_type -> registry.proto.group.PendingInviteResponse
-	8,  // 34: registry.proto.group.GroupService.GetGroupPendingInvite:output_type -> registry.proto.group.GetInviteRequestResponse
-	9,  // 35: registry.proto.group.GroupService.GetAllPendingJoinRequestsForOwner:output_type -> registry.proto.group.PendingJoinResponse
-	9,  // 36: registry.proto.group.GroupService.GetGroupPendingJoinRequestsForOwner:output_type -> registry.proto.group.PendingJoinResponse
-	9,  // 37: registry.proto.group.GroupService.GetAllPendingJoinRequestsBySender:output_type -> registry.proto.group.PendingJoinResponse
-	7,  // 38: registry.proto.group.GroupService.GetGroupPendingJoinRequestsBySender:output_type -> registry.proto.group.GetJoinRequestResponse
-	26, // [26:39] is the sub-list for method output_type
-	13, // [13:26] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	1,  // 2: registry.proto.group.UpdateJoin.status:type_name -> registry.proto.group.INVITE_STATUS
+	0,  // 3: registry.proto.group.GetJoinRequestResponse.type:type_name -> registry.proto.group.JoinType
+	1,  // 4: registry.proto.group.GetJoinRequestResponse.status:type_name -> registry.proto.group.INVITE_STATUS
+	0,  // 5: registry.proto.group.GetInviteRequestResponse.type:type_name -> registry.proto.group.JoinType
+	1,  // 6: registry.proto.group.GetInviteRequestResponse.status:type_name -> registry.proto.group.INVITE_STATUS
+	8,  // 7: registry.proto.group.PendingJoinResponse.pending_join_requests:type_name -> registry.proto.group.GetJoinRequestResponse
+	9,  // 8: registry.proto.group.PendingInviteResponse.pending_invite_requests:type_name -> registry.proto.group.GetInviteRequestResponse
+	2,  // 9: registry.proto.group.CreateGroupPeerMembershipRequest.role:type_name -> registry.proto.group.PeerRole
+	2,  // 10: registry.proto.group.GetGroupPeerMembershipResponse.role:type_name -> registry.proto.group.PeerRole
+	19, // 11: registry.proto.group.GetGroupPeerMembershipResponse.joined_at:type_name -> google.protobuf.Timestamp
+	19, // 12: registry.proto.group.Group.created_at:type_name -> google.protobuf.Timestamp
+	17, // 13: registry.proto.group.Groups.groups:type_name -> registry.proto.group.Group
+	3,  // 14: registry.proto.group.GroupService.CreateGroup:input_type -> registry.proto.group.CreateGroupRequest
+	20, // 15: registry.proto.group.GroupService.GetGroupsForPeer:input_type -> registry.proto.peer.GetPeerRequest
+	21, // 16: registry.proto.group.GroupService.GetGroups:input_type -> google.protobuf.Empty
+	12, // 17: registry.proto.group.GroupService.GetGroup:input_type -> registry.proto.group.GetGroupRequest
+	13, // 18: registry.proto.group.GroupService.CreateGroupPeerMembership:input_type -> registry.proto.group.CreateGroupPeerMembershipRequest
+	14, // 19: registry.proto.group.GroupService.GetGroupPeerMembership:input_type -> registry.proto.group.GetGroupPeerMembershipRequest
+	4,  // 20: registry.proto.group.GroupService.CreateJoinRequest:input_type -> registry.proto.group.CreateJoin
+	5,  // 21: registry.proto.group.GroupService.UpdateJoinRequestStatus:input_type -> registry.proto.group.UpdateJoin
+	6,  // 22: registry.proto.group.GroupService.GetAllPendingInvites:input_type -> registry.proto.group.GetAllPendingRequest
+	7,  // 23: registry.proto.group.GroupService.GetGroupPendingInvite:input_type -> registry.proto.group.GetGroupPendingRequest
+	6,  // 24: registry.proto.group.GroupService.GetAllPendingJoinRequestsForOwner:input_type -> registry.proto.group.GetAllPendingRequest
+	7,  // 25: registry.proto.group.GroupService.GetGroupPendingJoinRequestsForOwner:input_type -> registry.proto.group.GetGroupPendingRequest
+	6,  // 26: registry.proto.group.GroupService.GetAllPendingJoinRequestsBySender:input_type -> registry.proto.group.GetAllPendingRequest
+	7,  // 27: registry.proto.group.GroupService.GetGroupPendingJoinRequestsBySender:input_type -> registry.proto.group.GetGroupPendingRequest
+	16, // 28: registry.proto.group.GroupService.CreateGroup:output_type -> registry.proto.group.GroupID
+	18, // 29: registry.proto.group.GroupService.GetGroupsForPeer:output_type -> registry.proto.group.Groups
+	18, // 30: registry.proto.group.GroupService.GetGroups:output_type -> registry.proto.group.Groups
+	17, // 31: registry.proto.group.GroupService.GetGroup:output_type -> registry.proto.group.Group
+	21, // 32: registry.proto.group.GroupService.CreateGroupPeerMembership:output_type -> google.protobuf.Empty
+	15, // 33: registry.proto.group.GroupService.GetGroupPeerMembership:output_type -> registry.proto.group.GetGroupPeerMembershipResponse
+	21, // 34: registry.proto.group.GroupService.CreateJoinRequest:output_type -> google.protobuf.Empty
+	21, // 35: registry.proto.group.GroupService.UpdateJoinRequestStatus:output_type -> google.protobuf.Empty
+	11, // 36: registry.proto.group.GroupService.GetAllPendingInvites:output_type -> registry.proto.group.PendingInviteResponse
+	9,  // 37: registry.proto.group.GroupService.GetGroupPendingInvite:output_type -> registry.proto.group.GetInviteRequestResponse
+	10, // 38: registry.proto.group.GroupService.GetAllPendingJoinRequestsForOwner:output_type -> registry.proto.group.PendingJoinResponse
+	10, // 39: registry.proto.group.GroupService.GetGroupPendingJoinRequestsForOwner:output_type -> registry.proto.group.PendingJoinResponse
+	10, // 40: registry.proto.group.GroupService.GetAllPendingJoinRequestsBySender:output_type -> registry.proto.group.PendingJoinResponse
+	8,  // 41: registry.proto.group.GroupService.GetGroupPendingJoinRequestsBySender:output_type -> registry.proto.group.GetJoinRequestResponse
+	28, // [28:42] is the sub-list for method output_type
+	14, // [14:28] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_group_group_proto_init() }
@@ -1286,7 +1347,7 @@ func file_group_group_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_group_group_proto_rawDesc), len(file_group_group_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   15,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
