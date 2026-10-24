@@ -1371,7 +1371,7 @@ const file_group_group_proto_rawDesc = "" +
 	"\x05OWNER\x10\x00\x12\t\n" +
 	"\x05ADMIN\x10\x01\x12\n" +
 	"\n" +
-	"\x06MEMBER\x10\x022\x88\r\n" +
+	"\x06MEMBER\x10\x022\x91\r\n" +
 	"\fGroupService\x12V\n" +
 	"\vCreateGroup\x12(.registry.proto.group.CreateGroupRequest\x1a\x1d.registry.proto.group.GroupID\x12U\n" +
 	"\x10GetGroupsForPeer\x12#.registry.proto.peer.GetPeerRequest\x1a\x1c.registry.proto.group.Groups\x12A\n" +
@@ -1387,8 +1387,8 @@ const file_group_group_proto_rawDesc = "" +
 	"!GetAllPendingJoinRequestsForOwner\x12*.registry.proto.group.GetAllPendingRequest\x1a).registry.proto.group.PendingJoinResponse\x12~\n" +
 	"#GetGroupPendingJoinRequestsForOwner\x12,.registry.proto.group.GetGroupPendingRequest\x1a).registry.proto.group.PendingJoinResponse\x12z\n" +
 	"!GetAllPendingJoinRequestsBySender\x12*.registry.proto.group.GetAllPendingRequest\x1a).registry.proto.group.PendingJoinResponse\x12\x81\x01\n" +
-	"#GetGroupPendingJoinRequestsBySender\x12,.registry.proto.group.GetGroupPendingRequest\x1a,.registry.proto.group.GetJoinRequestResponse\x12Y\n" +
-	"\x13GetGroupOwnerPeerID\x12%.registry.proto.group.GetGroupRequest\x1a\x1b.registry.proto.peer.PeerIDB+Z)github.com/uddinArsalan/ferry-proto/groupb\x06proto3"
+	"#GetGroupPendingJoinRequestsBySender\x12,.registry.proto.group.GetGroupPendingRequest\x1a,.registry.proto.group.GetJoinRequestResponse\x12b\n" +
+	"\x13GetGroupOwnerPeerID\x12%.registry.proto.group.GetGroupRequest\x1a$.registry.proto.peer.GetPeerResponseB+Z)github.com/uddinArsalan/ferry-proto/groupb\x06proto3"
 
 var (
 	file_group_group_proto_rawDescOnce sync.Once
@@ -1429,7 +1429,7 @@ var file_group_group_proto_goTypes = []any{
 	(*timestamppb.Timestamp)(nil),            // 21: google.protobuf.Timestamp
 	(*peer.GetPeerRequest)(nil),              // 22: registry.proto.peer.GetPeerRequest
 	(*emptypb.Empty)(nil),                    // 23: google.protobuf.Empty
-	(*peer.PeerID)(nil),                      // 24: registry.proto.peer.PeerID
+	(*peer.GetPeerResponse)(nil),             // 24: registry.proto.peer.GetPeerResponse
 }
 var file_group_group_proto_depIdxs = []int32{
 	0,  // 0: registry.proto.group.GetJoinResponse.type:type_name -> registry.proto.group.JoinType
@@ -1479,7 +1479,7 @@ var file_group_group_proto_depIdxs = []int32{
 	12, // 44: registry.proto.group.GroupService.GetGroupPendingJoinRequestsForOwner:output_type -> registry.proto.group.PendingJoinResponse
 	12, // 45: registry.proto.group.GroupService.GetAllPendingJoinRequestsBySender:output_type -> registry.proto.group.PendingJoinResponse
 	10, // 46: registry.proto.group.GroupService.GetGroupPendingJoinRequestsBySender:output_type -> registry.proto.group.GetJoinRequestResponse
-	24, // 47: registry.proto.group.GroupService.GetGroupOwnerPeerID:output_type -> registry.proto.peer.PeerID
+	24, // 47: registry.proto.group.GroupService.GetGroupOwnerPeerID:output_type -> registry.proto.peer.GetPeerResponse
 	32, // [32:48] is the sub-list for method output_type
 	16, // [16:32] is the sub-list for method input_type
 	16, // [16:16] is the sub-list for extension type_name
