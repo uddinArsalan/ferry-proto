@@ -65,7 +65,7 @@ type GroupServiceClient interface {
 	// Join requests sent by the peer for a particular group
 	GetGroupPendingJoinRequestsBySender(ctx context.Context, in *GetGroupPendingRequest, opts ...grpc.CallOption) (*GetJoinRequestResponse, error)
 	// get group -> owner peer id
-	GetGroupOwnerPeerID(ctx context.Context, in *GetGroupRequest, opts ...grpc.CallOption) (*peer.GetPeerResponse, error)
+	GetGroupOwnerPeerID(ctx context.Context, in *GetGroupRequest, opts ...grpc.CallOption) (*peer.PeerID, error)
 }
 
 type groupServiceClient struct {
@@ -226,9 +226,9 @@ func (c *groupServiceClient) GetGroupPendingJoinRequestsBySender(ctx context.Con
 	return out, nil
 }
 
-func (c *groupServiceClient) GetGroupOwnerPeerID(ctx context.Context, in *GetGroupRequest, opts ...grpc.CallOption) (*peer.GetPeerResponse, error) {
+func (c *groupServiceClient) GetGroupOwnerPeerID(ctx context.Context, in *GetGroupRequest, opts ...grpc.CallOption) (*peer.PeerID, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(peer.GetPeerResponse)
+	out := new(peer.PeerID)
 	err := c.cc.Invoke(ctx, GroupService_GetGroupOwnerPeerID_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -262,7 +262,7 @@ type GroupServiceServer interface {
 	// Join requests sent by the peer for a particular group
 	GetGroupPendingJoinRequestsBySender(context.Context, *GetGroupPendingRequest) (*GetJoinRequestResponse, error)
 	// get group -> owner peer id
-	GetGroupOwnerPeerID(context.Context, *GetGroupRequest) (*peer.GetPeerResponse, error)
+	GetGroupOwnerPeerID(context.Context, *GetGroupRequest) (*peer.PeerID, error)
 	mustEmbedUnimplementedGroupServiceServer()
 }
 
@@ -318,7 +318,7 @@ func (UnimplementedGroupServiceServer) GetAllPendingJoinRequestsBySender(context
 func (UnimplementedGroupServiceServer) GetGroupPendingJoinRequestsBySender(context.Context, *GetGroupPendingRequest) (*GetJoinRequestResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetGroupPendingJoinRequestsBySender not implemented")
 }
-func (UnimplementedGroupServiceServer) GetGroupOwnerPeerID(context.Context, *GetGroupRequest) (*peer.GetPeerResponse, error) {
+func (UnimplementedGroupServiceServer) GetGroupOwnerPeerID(context.Context, *GetGroupRequest) (*peer.PeerID, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetGroupOwnerPeerID not implemented")
 }
 func (UnimplementedGroupServiceServer) mustEmbedUnimplementedGroupServiceServer() {}
