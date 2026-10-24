@@ -45,6 +45,22 @@ service GroupService {
 
   // get group -> owner peer id
   rpc GetGroupOwnerPeerID(GetGroupRequest) returns (registry.proto.peer.GetPeerResponse);
+
+  rpc GetPeerSyncSnapshot(registry.proto.peer.GetPeerRequest) returns (SnapshotResponse);
+}
+
+message SnapshotResponse {
+  string peer_id = 1;
+  repeated GroupWithPeers groups = 2;
+}
+
+message GroupWithPeers {
+  int64 id = 1;
+  string group_id = 2;
+  string name = 3;
+  int64 user_id = 4;
+  google.protobuf.Timestamp created_at = 5;
+  repeated registry.proto.peer.Peer peer = 6;
 }
 
 message CreateGroupRequest {
