@@ -24,6 +24,10 @@ message RegisterPeerRequest {
   string peer_id = 4;
 }
 
+message GetPeerResponse {
+  string peer_id = 1;
+}
+
 message PeerID {
   int64 id = 1;
 }

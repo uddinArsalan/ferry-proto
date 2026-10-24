@@ -36,6 +36,7 @@ const (
 	GroupService_GetGroupPendingJoinRequestsForOwner_FullMethodName = "/registry.proto.group.GroupService/GetGroupPendingJoinRequestsForOwner"
 	GroupService_GetAllPendingJoinRequestsBySender_FullMethodName   = "/registry.proto.group.GroupService/GetAllPendingJoinRequestsBySender"
 	GroupService_GetGroupPendingJoinRequestsBySender_FullMethodName = "/registry.proto.group.GroupService/GetGroupPendingJoinRequestsBySender"
+	GroupService_GetGroupOwnerPeerID_FullMethodName                 = "/registry.proto.group.GroupService/GetGroupOwnerPeerID"
 )
 
 // GroupServiceClient is the client API for GroupService service.
@@ -63,6 +64,8 @@ type GroupServiceClient interface {
 	GetAllPendingJoinRequestsBySender(ctx context.Context, in *GetAllPendingRequest, opts ...grpc.CallOption) (*PendingJoinResponse, error)
 	// Join requests sent by the peer for a particular group
 	GetGroupPendingJoinRequestsBySender(ctx context.Context, in *GetGroupPendingRequest, opts ...grpc.CallOption) (*GetJoinRequestResponse, error)
+	// get group -> owner peer id
+	GetGroupOwnerPeerID(ctx context.Context, in *GetGroupRequest, opts ...grpc.CallOption) (*peer.GetPeerResponse, error)
 }
 
 type groupServiceClient struct {
@@ -223,6 +226,16 @@ func (c *groupServiceClient) GetGroupPendingJoinRequestsBySender(ctx context.Con
 	return out, nil
 }
 
+func (c *groupServiceClient) GetGroupOwnerPeerID(ctx context.Context, in *GetGroupRequest, opts ...grpc.CallOption) (*peer.GetPeerResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(peer.GetPeerResponse)
+	err := c.cc.Invoke(ctx, GroupService_GetGroupOwnerPeerID_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GroupServiceServer is the server API for GroupService service.
 // All implementations must embed UnimplementedGroupServiceServer
 // for forward compatibility.
@@ -248,6 +261,8 @@ type GroupServiceServer interface {
 	GetAllPendingJoinRequestsBySender(context.Context, *GetAllPendingRequest) (*PendingJoinResponse, error)
 	// Join requests sent by the peer for a particular group
 	GetGroupPendingJoinRequestsBySender(context.Context, *GetGroupPendingRequest) (*GetJoinRequestResponse, error)
+	// get group -> owner peer id
+	GetGroupOwnerPeerID(context.Context, *GetGroupRequest) (*peer.GetPeerResponse, error)
 	mustEmbedUnimplementedGroupServiceServer()
 }
 
@@ -302,6 +317,9 @@ func (UnimplementedGroupServiceServer) GetAllPendingJoinRequestsBySender(context
 }
 func (UnimplementedGroupServiceServer) GetGroupPendingJoinRequestsBySender(context.Context, *GetGroupPendingRequest) (*GetJoinRequestResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetGroupPendingJoinRequestsBySender not implemented")
+}
+func (UnimplementedGroupServiceServer) GetGroupOwnerPeerID(context.Context, *GetGroupRequest) (*peer.GetPeerResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetGroupOwnerPeerID not implemented")
 }
 func (UnimplementedGroupServiceServer) mustEmbedUnimplementedGroupServiceServer() {}
 func (UnimplementedGroupServiceServer) testEmbeddedByValue()                      {}
@@ -594,6 +612,24 @@ func _GroupService_GetGroupPendingJoinRequestsBySender_Handler(srv interface{}, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _GroupService_GetGroupOwnerPeerID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GroupServiceServer).GetGroupOwnerPeerID(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GroupService_GetGroupOwnerPeerID_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GroupServiceServer).GetGroupOwnerPeerID(ctx, req.(*GetGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // GroupService_ServiceDesc is the grpc.ServiceDesc for GroupService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -660,6 +696,10 @@ var GroupService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetGroupPendingJoinRequestsBySender",
 			Handler:    _GroupService_GetGroupPendingJoinRequestsBySender_Handler,
+		},
+		{
+			MethodName: "GetGroupOwnerPeerID",
+			Handler:    _GroupService_GetGroupOwnerPeerID_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

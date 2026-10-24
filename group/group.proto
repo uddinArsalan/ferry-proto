@@ -42,6 +42,9 @@ service GroupService {
 
   // Join requests sent by the peer for a particular group
   rpc GetGroupPendingJoinRequestsBySender(GetGroupPendingRequest) returns (GetJoinRequestResponse);
+
+  // get group -> owner peer id
+  rpc GetGroupOwnerPeerID(GetGroupRequest) returns (registry.proto.peer.GetPeerResponse);
 }
 
 message CreateGroupRequest {
