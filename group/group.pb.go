@@ -228,9 +228,8 @@ type GroupWithPeers struct {
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	GroupId       string                 `protobuf:"bytes,2,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
 	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	UserId        int64                  `protobuf:"varint,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	Peer          []*peer.Peer           `protobuf:"bytes,6,rep,name=peer,proto3" json:"peer,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	Peer          []*peer.Peer           `protobuf:"bytes,5,rep,name=peer,proto3" json:"peer,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -284,13 +283,6 @@ func (x *GroupWithPeers) GetName() string {
 		return x.Name
 	}
 	return ""
-}
-
-func (x *GroupWithPeers) GetUserId() int64 {
-	if x != nil {
-		return x.UserId
-	}
-	return 0
 }
 
 func (x *GroupWithPeers) GetCreatedAt() *timestamppb.Timestamp {
@@ -1411,15 +1403,14 @@ const file_group_group_proto_rawDesc = "" +
 	"\x11group/group.proto\x12\x14registry.proto.group\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x0fpeer/peer.proto\"i\n" +
 	"\x10SnapshotResponse\x12\x17\n" +
 	"\apeer_id\x18\x01 \x01(\tR\x06peerId\x12<\n" +
-	"\x06groups\x18\x02 \x03(\v2$.registry.proto.group.GroupWithPeersR\x06groups\"\xd2\x01\n" +
+	"\x06groups\x18\x02 \x03(\v2$.registry.proto.group.GroupWithPeersR\x06groups\"\xb9\x01\n" +
 	"\x0eGroupWithPeers\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x19\n" +
 	"\bgroup_id\x18\x02 \x01(\tR\agroupId\x12\x12\n" +
-	"\x04name\x18\x03 \x01(\tR\x04name\x12\x17\n" +
-	"\auser_id\x18\x04 \x01(\x03R\x06userId\x129\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x129\n" +
 	"\n" +
-	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12-\n" +
-	"\x04peer\x18\x06 \x03(\v2\x19.registry.proto.peer.PeerR\x04peer\"C\n" +
+	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12-\n" +
+	"\x04peer\x18\x05 \x03(\v2\x19.registry.proto.peer.PeerR\x04peer\"C\n" +
 	"\x12CreateGroupRequest\x12\x19\n" +
 	"\bgroup_id\x18\x01 \x01(\tR\agroupId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\"+\n" +

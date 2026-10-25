@@ -231,7 +231,6 @@ type Peer struct {
 	Port          uint32                 `protobuf:"varint,4,opt,name=port,proto3" json:"port,omitempty"`
 	PeerId        string                 `protobuf:"bytes,5,opt,name=peer_id,json=peerId,proto3" json:"peer_id,omitempty"`
 	LastSeen      *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=last_seen,json=lastSeen,proto3" json:"last_seen,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -308,13 +307,6 @@ func (x *Peer) GetLastSeen() *timestamppb.Timestamp {
 	return nil
 }
 
-func (x *Peer) GetCreatedAt() *timestamppb.Timestamp {
-	if x != nil {
-		return x.CreatedAt
-	}
-	return nil
-}
-
 type Peers struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Peers         []*Peer                `protobuf:"bytes,1,rep,name=peers,proto3" json:"peers,omitempty"`
@@ -374,16 +366,14 @@ const file_peer_peer_proto_rawDesc = "" +
 	"\x0fGetPeerResponse\x12\x17\n" +
 	"\apeer_id\x18\x01 \x01(\tR\x06peerId\"\x18\n" +
 	"\x06PeerID\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"\xe5\x01\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"\xaa\x01\n" +
 	"\x04Peer\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x18\n" +
 	"\aaddress\x18\x03 \x01(\tR\aaddress\x12\x12\n" +
 	"\x04port\x18\x04 \x01(\rR\x04port\x12\x17\n" +
 	"\apeer_id\x18\x05 \x01(\tR\x06peerId\x127\n" +
-	"\tlast_seen\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\blastSeen\x129\n" +
-	"\n" +
-	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"8\n" +
+	"\tlast_seen\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\blastSeen\"8\n" +
 	"\x05Peers\x12/\n" +
 	"\x05peers\x18\x01 \x03(\v2\x19.registry.proto.peer.PeerR\x05peers2\xef\x01\n" +
 	"\vPeerService\x12U\n" +
@@ -416,19 +406,18 @@ var file_peer_peer_proto_goTypes = []any{
 }
 var file_peer_peer_proto_depIdxs = []int32{
 	6, // 0: registry.proto.peer.Peer.last_seen:type_name -> google.protobuf.Timestamp
-	6, // 1: registry.proto.peer.Peer.created_at:type_name -> google.protobuf.Timestamp
-	4, // 2: registry.proto.peer.Peers.peers:type_name -> registry.proto.peer.Peer
-	1, // 3: registry.proto.peer.PeerService.RegisterPeer:input_type -> registry.proto.peer.RegisterPeerRequest
-	7, // 4: registry.proto.peer.PeerService.GetPeers:input_type -> google.protobuf.Empty
-	0, // 5: registry.proto.peer.PeerService.GetPeer:input_type -> registry.proto.peer.GetPeerRequest
-	3, // 6: registry.proto.peer.PeerService.RegisterPeer:output_type -> registry.proto.peer.PeerID
-	5, // 7: registry.proto.peer.PeerService.GetPeers:output_type -> registry.proto.peer.Peers
-	4, // 8: registry.proto.peer.PeerService.GetPeer:output_type -> registry.proto.peer.Peer
-	6, // [6:9] is the sub-list for method output_type
-	3, // [3:6] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	4, // 1: registry.proto.peer.Peers.peers:type_name -> registry.proto.peer.Peer
+	1, // 2: registry.proto.peer.PeerService.RegisterPeer:input_type -> registry.proto.peer.RegisterPeerRequest
+	7, // 3: registry.proto.peer.PeerService.GetPeers:input_type -> google.protobuf.Empty
+	0, // 4: registry.proto.peer.PeerService.GetPeer:input_type -> registry.proto.peer.GetPeerRequest
+	3, // 5: registry.proto.peer.PeerService.RegisterPeer:output_type -> registry.proto.peer.PeerID
+	5, // 6: registry.proto.peer.PeerService.GetPeers:output_type -> registry.proto.peer.Peers
+	4, // 7: registry.proto.peer.PeerService.GetPeer:output_type -> registry.proto.peer.Peer
+	5, // [5:8] is the sub-list for method output_type
+	2, // [2:5] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_peer_peer_proto_init() }

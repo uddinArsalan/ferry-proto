@@ -39,7 +39,6 @@ message Peer {
   uint32 port = 4;
   string peer_id = 5;
   google.protobuf.Timestamp last_seen = 6;
-  google.protobuf.Timestamp created_at = 7;
 }
 
 message Peers {
